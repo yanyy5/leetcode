@@ -1,0 +1,77 @@
+### 解法一
+
+> 双重循环判回文，时间复杂度$O(n^3)$，成本太高了。
+
+* 
+
+```
+class Solution {
+public:
+    int countSubstrings(string s) {
+        if (s.empty()) return 0;
+
+        int count = 0;
+        
+        for (int i = 0; i < s.length(); ++ i)
+        {
+            for (int j = i; j < s.length(); ++ j)
+            {
+                if (check(s, i, j)) count ++ ;
+            }
+        }
+
+        return count;
+    }
+
+    //判断字符串s从left到right之间的子串是否回文
+    bool check(string &s, int left, int right)
+    {
+        while (left < right)
+        {
+            if (s[left] != s[right]) 
+                break;
+            ++ left, -- right;
+        }
+
+        return left >= right;
+    }
+};
+```
+
+### 解法二
+
+> 中心展开，由于回文串长度有可能是奇数或者偶数，所以每次循环要判断两种情况，时间复杂度为$O(n^2)$。
+
+* 
+
+```
+class Solution {
+public:
+    int countSubstrings(string s) {
+        if (s.empty()) return 0;
+
+        int count = 0;
+        for (int i = 0; i < s.length(); ++ i)
+        {
+            count += countPalindrome(s, i, i);          //奇数长度的情况
+            count += countPalindrome(s, i, i + 1);      //偶数长度的情况
+        }
+
+        return count;
+    }
+
+    //字符串s以start和end为边界向左右两边循环展开，同时判断子串是否回文
+    int countPalindrome(string &s, int start, int end)
+    {
+        int count = 0;
+        while (start >= 0 && end <= s.length() && s[start] == s[end])
+        {
+            -- start, ++ end;
+            ++ count;
+        }
+
+        return count;
+    }
+};
+```
+
