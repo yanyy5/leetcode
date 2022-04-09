@@ -93,30 +93,30 @@ class Solution {
 
 
     // bfs 版本
-//    private int getArea(int[][] grid, boolean[][] visited, int i, int j){
-//        Queue<int[]> queue = new LinkedList<>();
-//        queue.offer(new int[]{i, j});
-//        visited[i][j] = true;
-//
-//        int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-//        int area = 0;
-//        while (!queue.isEmpty()){
-//            int[] pos = queue.poll();
-//            area++;
-//
-//            for (int[] dir : dirs){
-//                int r = pos[0]+dir[0];
-//                int c = pos[1]+dir[1];
-//                if (r >= 0 && r < grid.length && c >= 0 && c < grid[0].length
-//                        && grid[r][c] == 1 && !visited[r][c]){
-//                    queue.offer(new int[]{r, c});
-//                    visited[r][c] = true;
-//                }
-//            }
-//
-//        }
-//        return area;
-//    }
+    private int getArea(int[][] grid, boolean[][] visited, int i, int j){
+        Queue<int[]> queue = new LinkedList<>();
+        queue.offer(new int[]{i, j});
+        visited[i][j] = true;
+
+        int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+        int area = 0;
+        while (!queue.isEmpty()){
+            int[] pos = queue.poll();
+            area++;
+
+            for (int[] dir : dirs){
+                int r = pos[0]+dir[0];
+                int c = pos[1]+dir[1];
+                if (r >= 0 && r < grid.length && c >= 0 && c < grid[0].length
+                        && grid[r][c] == 1 && !visited[r][c]){
+                    queue.offer(new int[]{r, c});
+                    visited[r][c] = true;
+                }
+            }
+
+        }
+        return area;
+    }
 
 }
 //leetcode submit region end(Prohibit modification and deletion)
